@@ -1,0 +1,11 @@
+# Use a base image with OpenJDK 17
+FROM openjdk:17
+
+# Copy the JAR file from the target directory (Ensure your JAR is built using `mvn package`)
+add target/spring-boot-docker.jar spring-boot-docker.jar
+
+# Expose the application's port (Change it as per your application’s configuration)
+EXPOSE 8080
+
+# Command to run the application
+ENTRYPOINT ["java", "-jar", "spring-boot-docker.jar"]

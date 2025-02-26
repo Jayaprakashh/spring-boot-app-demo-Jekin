@@ -1,0 +1,13 @@
+package com.jenkins.demok;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class SpringBootAppDemoJekinApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(SpringBootAppDemoJekinApplication.class, args);
+	}
+
+}
