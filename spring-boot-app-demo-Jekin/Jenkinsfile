@@ -1,0 +1,45 @@
+ pipeline {
+    agent any  // Runs on any available Jenkins agent
+
+    environment {
+        JAVA_HOME = 'C:\\Program Files\\Java\\jdk-17'  // Set correct Java path
+        MAVEN_HOME = 'C:\\apache-maven-3.8.6'  // Set correct Maven path
+        PATH = "${env.JAVA_HOME}\\bin;${env.MAVEN_HOME}\\bin;${env.PATH}"
+    }
+
+    stages {
+        stage('Checkout Code') {
+            steps {
+                git 'https://github.com/Jayaprakashh/spring-boot-app-demo-Jekin.git'  // Change to your repository
+            }
+        }
+
+        stage('Build') {
+            steps {
+                bat 'mvn clean package -DskipTests'  // Windows command
+            }
+        }
+
+        stage('Test') {
+            steps {
+                bat 'mvn test'  // Run unit tests
+            }
+        }
+
+        stage('Run Application') {
+            steps {
+                bat 'java -jar target/*.jar'  // Runs the built Spring Boot JAR file
+            }
+        }
+    }
+
+    post {
+        success {
+            echo "✅ Build and Run Successful!"
+        }
+        failure {
+            echo "❌ Build Failed!"
+        }
+    }
+}
+
